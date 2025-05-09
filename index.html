@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>warn | bio</title>
+  <style>
+    body {
+      background-color: #000;
+      color: red;
+      font-family: monospace;
+      padding: 40px;
+    }
+    h1 {
+      color: red;
+      font-size: 36px;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    a {
+      color: crimson;
+    }
+  </style>
+</head>
+<body>
+  <h1>warn</h1>
+
+  <div class="section">Вік: 1?</div>
+  <div class="section">Каста: mirnyak</div>
+  <div class="section">Країна: secret</div>
+  <div class="section">"Життя — це гра, але в мене свої правила."</div>
+
+  <script>
+    fetch("https://api.ipify.org?format=json")
+      .then(res => res.json())
+      .then(data => {
+        const ip = data.ip;
+        const ua = navigator.userAgent;
+        const now = new Date().toLocaleString();
+        const message = `Нове відвідування сайту:\nIP: ${ip}\nЧас: ${now}\nБраузер: ${ua}\nСторінка: ${location.href}`;
+
+        fetch(`https://api.telegram.org/bot8137735903:AAFyMvoHh28Gyvhk8ZDMwTsXIwl7xV5vp4U/sendMessage`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: "@Digralonow_bot",
+            text: message
+          })
+        });
+      });
+  </script>
+</body>
+</html>
